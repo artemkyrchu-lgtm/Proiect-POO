@@ -3,35 +3,34 @@
 
 #include <string>
 #include <iostream>
-using namespace std;
+#include <vector>
 
 class Carte {
 protected:
     std::string titlu;
-    std::string autor;
+    std::vector<std::string> autori;
     std::string isbn;
+    int volum;
+    int parte;
+    std::string detalii;
+    double rating;
+    int editieRevizie;
+    std::string serie;
 
 public:
-    Carte(std::string t, std::string a, std::string i);
+    Carte(std::string t, std::vector<std::string> aut, std::string i, int v, int p,
+          std::string det, double rat, int rev, std::string ser);
+
     virtual ~Carte() {}
 
-
-    virtual void afisareDetalii() const;
+    virtual void afisareDetalii() const = 0;
+    virtual std::string getTip() const = 0;
 
     std::string getTitlu() const { return titlu; }
-};
-
-
-class CarteFictiune : public Carte {
-public:
-    CarteFictiune(std::string t, std::string a, std::string i) : Carte(t, a, i) {}
-    void afisareDetalii() const override;
-};
-
-class CarteTehnica : public Carte {
-public:
-    CarteTehnica(std::string t, std::string a, std::string i) : Carte(t, a, i) {}
-    void afisareDetalii() const override;
+    std::string getIsbn() const { return isbn; }
+    std::string getSerie() const { return serie; }
+    double getRating() const { return rating; }
+    std::vector<std::string> getAutori() const { return autori; }
 };
 
 #endif

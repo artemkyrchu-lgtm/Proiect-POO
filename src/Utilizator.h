@@ -1,9 +1,9 @@
 #ifndef UTILIZATOR_H
 #define UTILIZATOR_H
-using namespace std;
+
 #include <string>
 #include <vector>
-#include "Carte.h"
+#include <iostream>
 
 class Utilizator {
 private:
@@ -13,8 +13,12 @@ private:
 
 public:
     Utilizator(std::string n, int i);
-    void adaugaImprumut(std::string titlu);
+    void adaugaImprumut(const std::string& titlu);
+    bool stergeImprumut(const std::string& titlu);
     void afisareInfo() const;
+    std::string getNume() const { return nume; }
+    int getId() const { return id; }
+    const std::vector<std::string>& getImprumuturi() const { return imprumuturi; }
 };
 
 #endif

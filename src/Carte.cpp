@@ -1,15 +1,6 @@
 #include "Carte.h"
-using namespace std;
-Carte::Carte(std::string t, std::string a, std::string i) : titlu(t), autor(a), isbn(i) {}
 
-void Carte::afisareDetalii() const {
-    std::cout << "[CARTE] " << titlu << " | Autor: " << autor << " | ISBN: " << isbn << std::endl;
-}
-
-void CarteFictiune::afisareDetalii() const {
-    std::cout << "[FICTIUNE] " << titlu << " - O poveste captivanta." << std::endl;
-}
-
-void CarteTehnica::afisareDetalii() const {
-    std::cout << "[TEHNICA] " << titlu << " - Manual de specialitate." << std::endl;
-}
+Carte::Carte(std::string t, std::vector<std::string> aut, std::string i, int v, int p,
+             std::string det, double rat, int rev, std::string ser)
+    : titlu(t), autori(aut), isbn(i), volum(v), parte(p),
+      detalii(det), rating(rat), editieRevizie(rev), serie(ser) {}
