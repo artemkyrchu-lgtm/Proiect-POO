@@ -117,7 +117,7 @@ vector<string> citesteAutori() {
 }
 
 // ═══════════════════════════════════════════════════════════
-//  AUTENTIFICARE
+//  AUTENTIFICARE SI CONTURI
 // ═══════════════════════════════════════════════════════════
 
 bool existaUsername(const string& username) {
@@ -142,7 +142,7 @@ Cont* loginCont(bool adminMode) {
                 pauseScreen();
                 return nullptr;
             }
-            cout << "\n  OK Bun venit, " << username << "!\n";
+            cout << "\n  OK Bun venit, " << c.prenume << " " << c.nume << "!\n";
             pauseScreen();
             return &c;
         }
@@ -150,6 +150,13 @@ Cont* loginCont(bool adminMode) {
     cout << "\n  X Username sau parola incorecta!\n";
     pauseScreen();
     return nullptr;
+}
+
+// citeste campurile comune (nume, prenume, data nasterii) pentru orice cont
+void citesteDatePersonale(Cont& c) {
+    c.nume         = citesteStringDirect("Nume: ");
+    c.prenume      = citesteStringDirect("Prenume: ");
+    c.dataNasterii = citesteStringDirect("Data nasterii (DD.MM.YYYY): ");
 }
 
 Cont* creeazaCont(bool esteAdmin) {
@@ -166,11 +173,57 @@ Cont* creeazaCont(bool esteAdmin) {
         pauseScreen();
         return nullptr;
     }
-    conturi.push_back({username, parola, esteAdmin});
+    Cont c;
+    c.username  = username;
+    c.parola    = parola;
+    c.esteAdmin = esteAdmin;
+    citesteDatePersonale(c);
+
+    conturi.push_back(c);
     salveazaConturi(conturi, FISIER_CONTURI);
     cout << "\n  OK Cont creat! Acum te poti loga.\n";
     pauseScreen();
     return &conturi.back();
+}
+
+// ═══════════════════════════════════════════════════════════
+//  CAUTARE DUPA CATEGORIE
+// ═══════════════════════════════════════════════════════════
+
+void cautaDupaTip(const Biblioteca& bib) {
+    printHeader("CAUTA DUPA CATEGORIE");
+    cout << "  1. Carte Digitala\n";
+    cout << "  2. Audiobook\n";
+    cout << "  3. Manga / Comics\n";
+    cout << "  4. Film\n";
+    cout << "  0. Inapoi\n\n";
+    int opt = citesteInt("Categorie: ");
+    if (opt == 0) return;
+
+    string tipCautat;
+    string eticheta;
+    switch (opt) {
+        case 1: tipCautat = "CarteDigitala"; eticheta = "CARTI DIGITALE"; break;
+        case 2: tipCautat = "Audiobook";     eticheta = "AUDIOBOOK-URI";  break;
+        case 3: tipCautat = "MangaComics";   eticheta = "MANGA / COMICS"; break;
+        case 4: tipCautat = "FilmCarte";     eticheta = "FILME";          break;
+        default:
+            cout << "  Optiune invalida!\n";
+            pauseScreen();
+            return;
+    }
+
+    printHeader(eticheta);
+    int nr = 0;
+    for (const auto& c : bib.getCatalog()) {
+        if (c->getTip() == tipCautat) {
+            cout << "  " << ++nr << ". ";
+            c->afisareDetalii();
+        }
+    }
+    if (nr == 0) cout << "  Nu exista intrari in aceasta categorie.\n";
+    else cout << "\n  Total: " << nr << " intrari.\n";
+    pauseScreen();
 }
 
 // ═══════════════════════════════════════════════════════════
@@ -297,22 +350,21 @@ void menuSterge(Biblioteca& bib) {
 // ═══════════════════════════════════════════════════════════
 
 void menuUtilizator(Biblioteca& bib, Cont& contLogat) {
-    Utilizator user(contLogat.username, 0);
-
     while (true) {
-        printHeader("UTILIZATOR - " + contLogat.username);
+        printHeader("UTILIZATOR - " + contLogat.prenume + " " + contLogat.nume);
         cout << "  1. Vezi biblioteca\n";
-        cout << "  2. Cauta carte\n";
-        cout << "  3. Imprumuta carte\n";
-        cout << "  4. Returneaza carte\n";
-        cout << "  5. Cartile mele\n";
+        cout << "  2. Cauta carte dupa titlu\n";
+        cout << "  3. Cauta dupa categorie\n";
+        cout << "  4. Imprumuta carte\n";
+        cout << "  5. Returneaza carte\n";
+        cout << "  6. Cartile mele\n";
         printSeparator();
         cout << "  0. Logout\n\n";
 
         int opt = citesteInt("Optiunea ta: ");
 
         if (opt == 0) {
-            cout << "\n  La revedere, " << contLogat.username << "!\n";
+            cout << "\n  La revedere, " << contLogat.prenume << "!\n";
             pauseScreen();
             return;
         } else if (opt == 1) {
@@ -328,6 +380,8 @@ void menuUtilizator(Biblioteca& bib, Cont& contLogat) {
             catch (const exception& e) { cout << "  " << e.what() << "\n"; }
             pauseScreen();
         } else if (opt == 3) {
+            cautaDupaTip(bib);
+        } else if (opt == 4) {
             printHeader("IMPRUMUTA CARTE");
             if (bib.numarCarti() == 0) {
                 cout << "  Biblioteca este goala!\n";
@@ -337,24 +391,56 @@ void menuUtilizator(Biblioteca& bib, Cont& contLogat) {
             bib.afisareToate();
             cout << "\n";
             string titlu = citesteString("Titlu de imprumutat: ");
-            if (!bib.existaCarte(titlu))
+            if (!bib.existaCarte(titlu)) {
                 cout << "  X Cartea nu exista!\n";
-            else {
-                user.adaugaImprumut(titlu);
-                cout << "  OK Carte imprumutata!\n";
+            } else {
+                // verifica daca nu are deja imprumutata
+                auto it = find(contLogat.imprumuturi.begin(),
+                               contLogat.imprumuturi.end(), titlu);
+                if (it != contLogat.imprumuturi.end()) {
+                    cout << "  X Ai deja aceasta carte imprumutata!\n";
+                } else {
+                    contLogat.imprumuturi.push_back(titlu);
+                    salveazaConturi(conturi, FISIER_CONTURI);
+                    cout << "  OK Carte imprumutata!\n";
+                }
             }
             pauseScreen();
-        } else if (opt == 4) {
-            printHeader("RETURNEAZA CARTE");
-            string titlu = citesteString("Titlu de returnat: ");
-            if (user.stergeImprumut(titlu))
-                cout << "  OK Carte returnata!\n";
-            else
-                cout << "  X Nu ai aceasta carte imprumutata!\n";
-            pauseScreen();
         } else if (opt == 5) {
-            printHeader("CARTILE MELE");
-            user.afisareInfo();
+            printHeader("RETURNEAZA CARTE");
+            if (contLogat.imprumuturi.empty()) {
+                cout << "  Nu ai nicio carte imprumutata.\n";
+                pauseScreen();
+                continue;
+            }
+            cout << "  Cartile tale:\n";
+            for (int i = 0; i < (int)contLogat.imprumuturi.size(); i++)
+                cout << "  " << i+1 << ". " << contLogat.imprumuturi[i] << "\n";
+            cout << "\n";
+            string titlu = citesteString("Titlu de returnat: ");
+            auto it = find(contLogat.imprumuturi.begin(),
+                           contLogat.imprumuturi.end(), titlu);
+            if (it != contLogat.imprumuturi.end()) {
+                contLogat.imprumuturi.erase(it);
+                salveazaConturi(conturi, FISIER_CONTURI);
+                cout << "  OK Carte returnata!\n";
+            } else {
+                cout << "  X Nu ai aceasta carte imprumutata!\n";
+            }
+            pauseScreen();
+        } else if (opt == 6) {
+            printHeader("CARTILE MELE - " + contLogat.prenume + " " + contLogat.nume);
+            cout << "  Username:       " << contLogat.username << "\n";
+            cout << "  Nume complet:   " << contLogat.prenume << " " << contLogat.nume << "\n";
+            cout << "  Data nasterii:  " << contLogat.dataNasterii << "\n";
+            cout << "  Carti imprumutate: ";
+            if (contLogat.imprumuturi.empty()) {
+                cout << "Niciuna\n";
+            } else {
+                cout << "\n";
+                for (const auto& t : contLogat.imprumuturi)
+                    cout << "    - " << t << "\n";
+            }
             pauseScreen();
         } else {
             cout << "  Optiune invalida!\n";
@@ -367,21 +453,105 @@ void menuUtilizator(Biblioteca& bib, Cont& contLogat) {
 //  MENIU ADMIN
 // ═══════════════════════════════════════════════════════════
 
+void menuGestionareUseri(Cont& adminLogat) {
+    while (true) {
+        printHeader("GESTIONARE UTILIZATORI");
+        cout << "  1. Lista utilizatori\n";
+        cout << "  2. Sterge utilizator\n";
+        cout << "  3. Vezi imprumuturile unui utilizator\n";
+        cout << "  0. Inapoi\n\n";
+
+        int opt = citesteInt("Optiunea ta: ");
+
+        if (opt == 0) return;
+
+        else if (opt == 1) {
+            printHeader("LISTA UTILIZATORI");
+            int idx = 1;
+            for (const auto& c : conturi) {
+                cout << "  " << idx++ << ". "
+                     << c.prenume << " " << c.nume
+                     << "  (@" << c.username << ")"
+                     << "  Nastut: " << c.dataNasterii
+                     << (c.esteAdmin ? "  [ADMIN]" : "  [user]") << "\n";
+            }
+            if (conturi.empty()) cout << "  Nu exista conturi.\n";
+            pauseScreen();
+
+        } else if (opt == 2) {
+            printHeader("STERGE UTILIZATOR");
+            // afiseaza doar userii (nu adminii)
+            vector<int> idxUseri;
+            for (int i = 0; i < (int)conturi.size(); i++) {
+                if (!conturi[i].esteAdmin) idxUseri.push_back(i);
+            }
+            if (idxUseri.empty()) {
+                cout << "  Nu exista utilizatori de sters.\n";
+                pauseScreen();
+                continue;
+            }
+            for (int j = 0; j < (int)idxUseri.size(); j++) {
+                const auto& c = conturi[idxUseri[j]];
+                cout << "  " << j+1 << ". " << c.prenume << " " << c.nume
+                     << "  (@" << c.username << ")\n";
+            }
+            cout << "  0. Anuleaza\n\n";
+            int sel = citesteInt("Selectie: ");
+            if (sel == 0) { pauseScreen(); continue; }
+            if (sel < 1 || sel > (int)idxUseri.size()) {
+                cout << "  Selectie invalida!\n";
+                pauseScreen();
+                continue;
+            }
+            int idxDeSters = idxUseri[sel - 1];
+            string userDeSters = conturi[idxDeSters].username;
+            conturi.erase(conturi.begin() + idxDeSters);
+            salveazaConturi(conturi, FISIER_CONTURI);
+            cout << "\n  OK Utilizatorul @" << userDeSters << " a fost sters.\n";
+            pauseScreen();
+
+        } else if (opt == 3) {
+            printHeader("IMPRUMUTURI UTILIZATORI");
+            bool gasit = false;
+            for (const auto& c : conturi) {
+                if (c.esteAdmin) continue;
+                gasit = true;
+                cout << "  Utilizator: " << c.prenume << " " << c.nume
+                     << "  (@" << c.username << ")\n";
+                if (c.imprumuturi.empty()) {
+                    cout << "    (nicio carte imprumutata)\n";
+                } else {
+                    for (const auto& t : c.imprumuturi)
+                        cout << "    - " << t << "\n";
+                }
+                cout << "\n";
+            }
+            if (!gasit) cout << "  Nu exista utilizatori.\n";
+            pauseScreen();
+
+        } else {
+            cout << "  Optiune invalida!\n";
+            pauseScreen();
+        }
+    }
+}
+
 void menuAdmin(Biblioteca& bib, Cont& contLogat) {
     while (true) {
-        printHeader("ADMIN - " + contLogat.username);
+        printHeader("ADMIN - " + contLogat.prenume + " " + contLogat.nume);
         cout << "  1. Vezi biblioteca\n";
-        cout << "  2. Cauta carte\n";
-        cout << "  3. Adauga carte\n";
-        cout << "  4. Sterge carte\n";
-        cout << "  5. Lista conturi\n";
+        cout << "  2. Cauta carte dupa titlu\n";
+        cout << "  3. Cauta dupa categorie\n";
+        cout << "  4. Adauga carte\n";
+        cout << "  5. Sterge carte\n";
+        cout << "  6. Gestionare utilizatori\n";
         printSeparator();
         cout << "  0. Logout\n\n";
 
         int opt = citesteInt("Optiunea ta: ");
 
         if (opt == 0) {
-            cout << "\n  La revedere, Admin " << contLogat.username << "!\n";
+            cout << "\n  La revedere, Admin " << contLogat.prenume << "!\n";
             pauseScreen();
             return;
         } else if (opt == 1) {
@@ -396,16 +566,12 @@ void menuAdmin(Biblioteca& bib, Cont& contLogat) {
             try { bib.cautaCarte(titlu); }
             catch (const exception& e) { cout << "  " << e.what() << "\n"; }
             pauseScreen();
-        } else if (opt == 3) menuAdauga(bib);
-        else if (opt == 4) menuSterge(bib);
-        else if (opt == 5) {
-            printHeader("LISTA CONTURI");
-            for (int i = 0; i < (int)conturi.size(); i++)
-                cout << "  " << i+1 << ". " << conturi[i].username
-                     << (conturi[i].esteAdmin ? "  [ADMIN]" : "  [user]") << "\n";
-            if (conturi.empty()) cout << "  Nu exista conturi.\n";
-            pauseScreen();
-        } else {
+        } else if (opt == 3) {
+            cautaDupaTip(bib);
+        } else if (opt == 4) menuAdauga(bib);
+        else if (opt == 5) menuSterge(bib);
+        else if (opt == 6) menuGestionareUseri(contLogat);
+        else {
             cout << "  Optiune invalida!\n";
             pauseScreen();
         }
@@ -417,13 +583,9 @@ void menuAdmin(Biblioteca& bib, Cont& contLogat) {
 // ═══════════════════════════════════════════════════════════
 
 int main() {
-    // Creeaza fisierele JSON default daca nu exista
     initializeazaFisiere();
-
-    // Incarca conturi din conturi.json
     incarcaConturi(conturi, FISIER_CONTURI);
 
-    // Incarca biblioteca din biblioteca.json
     Biblioteca biblioteca;
     incarcaBiblioteca(biblioteca, FISIER_BIBLIOTECA);
 

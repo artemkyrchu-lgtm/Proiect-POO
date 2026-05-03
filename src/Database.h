@@ -9,11 +9,15 @@
 const std::string FISIER_BIBLIOTECA = "biblioteca.json";
 const std::string FISIER_CONTURI    = "conturi.json";
 
-// ── Structura Cont (mutata aici din main.cpp) ─────────────────────────────────
+// ── Structura Cont (cu campuri extinse) ───────────────────────────────────────
 struct Cont {
     std::string username;
     std::string parola;
     bool esteAdmin = false;
+    std::string nume;
+    std::string prenume;
+    std::string dataNasterii;             // format: DD.MM.YYYY
+    std::vector<std::string> imprumuturi; // lista titluri imprumutate (doar useri)
 };
 
 // ── Biblioteca JSON ───────────────────────────────────────────────────────────

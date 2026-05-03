@@ -3,12 +3,56 @@
     {
       "username": "admin",
       "parola": "1234",
-      "esteAdmin": true
+      "esteAdmin": true,
+      "nume": "Popescu",
+      "prenume": "Ion",
+      "dataNasterii": "01.01.1980",
+      "imprumuturi": []
     },
     {
       "username": "user",
       "parola": "1234",
-      "esteAdmin": false
+      "esteAdmin": false,
+      "nume": "Ionescu",
+      "prenume": "Maria",
+      "dataNasterii": "15.06.1995",
+      "imprumuturi": []
+    },
+    {
+      "username": "dd",
+      "parola": "1234\\",
+      "esteAdmin": true,
+      "nume": "Artem",
+      "prenume": "Kyrchu",
+      "dataNasterii": "11.08.20087",
+      "imprumuturi": []
+    },
+    {
+      "username": "artem",
+      "parola": "1234",
+      "esteAdmin": false,
+      "nume": "artem",
+      "prenume": "kyrchu",
+      "dataNasterii": "11.08.2007",
+      "imprumuturi": []
+    },
+    {
+      "username": "admin1",
+      "parola": "1234",
+      "esteAdmin": true,
+      "nume": "artem",
+      "prenume": "yolop",
+      "dataNasterii": "11.08.2007",
+      "imprumuturi": []
+    },
+    {
+      "username": "yolop",
+      "parola": "1234",
+      "esteAdmin": true,
+      "nume": "artem",
+      "prenume": "kakat",
+      "dataNasterii": "11.08.2007",
+      "imprumuturi": []
     }
   ]
 }
