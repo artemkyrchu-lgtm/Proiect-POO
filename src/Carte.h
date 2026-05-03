@@ -30,7 +30,15 @@ public:
     std::string getIsbn() const { return isbn; }
     std::string getSerie() const { return serie; }
     double getRating() const { return rating; }
+    int getVolum() const { return volum; }
+    int getParte() const { return parte; }
+    std::string getDetalii() const { return detalii; }
+    int getEditieRevizie() const { return editieRevizie; }
     std::vector<std::string> getAutori() const { return autori; }
+    virtual std::string getExtra1() const { return ""; }
+    virtual std::string getExtra2() const { return ""; }
+    virtual int getExtraInt() const { return 0; }
+    virtual bool getExtraBool() const { return false; }
 };
 
 #endif

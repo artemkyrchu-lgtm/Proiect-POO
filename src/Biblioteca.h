@@ -17,6 +17,7 @@ public:
     void cautaCarte(const std::string& titlu) const;
     bool existaCarte(const std::string& titlu) const;
     int numarCarti() const { return (int)catalog.size(); }
+    const std::vector<std::unique_ptr<Carte>>& getCatalog() const { return catalog; }
 };
 
 #endif

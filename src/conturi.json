@@ -1,0 +1,14 @@
+{
+  "conturi": [
+    {
+      "username": "admin",
+      "parola": "1234",
+      "esteAdmin": true
+    },
+    {
+      "username": "user",
+      "parola": "1234",
+      "esteAdmin": false
+    }
+  ]
+}

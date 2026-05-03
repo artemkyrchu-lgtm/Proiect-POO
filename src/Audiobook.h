@@ -15,6 +15,8 @@ public:
 
     void afisareDetalii() const override;
     std::string getTip() const override { return "Audiobook"; }
+    std::string getExtra1() const override { return narator; }
+    int getExtraInt() const override { return durataMinute; }
 };
 
 #endif

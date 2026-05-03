@@ -14,7 +14,9 @@ public:
                 bool color, std::string stil);
 
     void afisareDetalii() const override;
-    std::string getTip() const override { return "Manga/Comics"; }
+    std::string getTip() const override { return "MangaComics"; }
+    std::string getExtra1() const override { return stilDesen; }
+    bool getExtraBool() const override { return esteColor; }
 };
 
 #endif

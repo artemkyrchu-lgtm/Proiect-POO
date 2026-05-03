@@ -1,0 +1,813 @@
+{
+  "carti": [
+    {
+      "tip": "CarteDigitala",
+      "titlu": "Dune",
+      "autori": [
+        "Frank Herbert"
+      ],
+      "isbn": "ISBN-CD-001",
+      "volum": 1,
+      "parte": 1,
+      "editie": 3,
+      "detalii": "Capodopera SF despre planeta Arrakis si mirodenia rara.",
+      "rating": 9.5,
+      "serie": "SER-DUNE",
+      "formatFisier": "EPUB",
+      "areDrm": false
+    },
+    {
+      "tip": "CarteDigitala",
+      "titlu": "Mesagerul Apocalipsei",
+      "autori": [
+        "Frank Herbert"
+      ],
+      "isbn": "ISBN-CD-002",
+      "volum": 2,
+      "parte": 1,
+      "editie": 2,
+      "detalii": "Continuarea seriei Dune, povestea lui Paul Atreides.",
+      "rating": 9.0,
+      "serie": "SER-DUNE",
+      "formatFisier": "EPUB",
+      "areDrm": false
+    },
+    {
+      "tip": "CarteDigitala",
+      "titlu": "1984",
+      "autori": [
+        "George Orwell"
+      ],
+      "isbn": "ISBN-CD-003",
+      "volum": 1,
+      "parte": 1,
+      "editie": 5,
+      "detalii": "Distopie clasica despre un stat totalitar supravegheat de Big Brother.",
+      "rating": 9.7,
+      "serie": "STANDALONE",
+      "formatFisier": "PDF",
+      "areDrm": false
+    },
+    {
+      "tip": "CarteDigitala",
+      "titlu": "Brave New World",
+      "autori": [
+        "Aldous Huxley"
+      ],
+      "isbn": "ISBN-CD-004",
+      "volum": 1,
+      "parte": 1,
+      "editie": 4,
+      "detalii": "O societate utopica distopica controlata prin conditionare si placere.",
+      "rating": 9.2,
+      "serie": "STANDALONE",
+      "formatFisier": "EPUB",
+      "areDrm": true
+    },
+    {
+      "tip": "CarteDigitala",
+      "titlu": "Fundatia",
+      "autori": [
+        "Isaac Asimov"
+      ],
+      "isbn": "ISBN-CD-005",
+      "volum": 1,
+      "parte": 1,
+      "editie": 3,
+      "detalii": "Saga despre prabusirea si reconstructia civilizatiei galactice.",
+      "rating": 9.4,
+      "serie": "SER-FUNDATIE",
+      "formatFisier": "EPUB",
+      "areDrm": false
+    },
+    {
+      "tip": "CarteDigitala",
+      "titlu": "Fundatia si Imperiul",
+      "autori": [
+        "Isaac Asimov"
+      ],
+      "isbn": "ISBN-CD-006",
+      "volum": 2,
+      "parte": 1,
+      "editie": 2,
+      "detalii": "Lupta Fundatiei impotriva ramas imperiului galactic.",
+      "rating": 9.1,
+      "serie": "SER-FUNDATIE",
+      "formatFisier": "EPUB",
+      "areDrm": false
+    },
+    {
+      "tip": "CarteDigitala",
+      "titlu": "The Hitchhiker's Guide to the Galaxy",
+      "autori": [
+        "Douglas Adams"
+      ],
+      "isbn": "ISBN-CD-007",
+      "volum": 1,
+      "parte": 1,
+      "editie": 6,
+      "detalii": "Aventura comica SF a lui Arthur Dent prin univers.",
+      "rating": 9.6,
+      "serie": "SER-HITCHHIKER",
+      "formatFisier": "EPUB",
+      "areDrm": false
+    },
+    {
+      "tip": "CarteDigitala",
+      "titlu": "Neuromancer",
+      "autori": [
+        "William Gibson"
+      ],
+      "isbn": "ISBN-CD-008",
+      "volum": 1,
+      "parte": 1,
+      "editie": 2,
+      "detalii": "Romanul fondator al genului cyberpunk, despre hackeri si AI.",
+      "rating": 8.8,
+      "serie": "SER-SPRAWL",
+      "formatFisier": "PDF",
+      "areDrm": true
+    },
+    {
+      "tip": "CarteDigitala",
+      "titlu": "Snow Crash",
+      "autori": [
+        "Neal Stephenson"
+      ],
+      "isbn": "ISBN-CD-009",
+      "volum": 1,
+      "parte": 1,
+      "editie": 3,
+      "detalii": "SF cyberpunk ce a inventat conceptul de metavers.",
+      "rating": 8.9,
+      "serie": "STANDALONE",
+      "formatFisier": "EPUB",
+      "areDrm": false
+    },
+    {
+      "tip": "CarteDigitala",
+      "titlu": "The Name of the Wind",
+      "autori": [
+        "Patrick Rothfuss"
+      ],
+      "isbn": "ISBN-CD-010",
+      "volum": 1,
+      "parte": 1,
+      "editie": 2,
+      "detalii": "Povestea lui Kvothe, cel mai legendar mag al tuturor timpurilor.",
+      "rating": 9.3,
+      "serie": "SER-KINGKILLER",
+      "formatFisier": "EPUB",
+      "areDrm": false
+    },
+    {
+      "tip": "CarteDigitala",
+      "titlu": "A Game of Thrones",
+      "autori": [
+        "George R.R. Martin"
+      ],
+      "isbn": "ISBN-CD-011",
+      "volum": 1,
+      "parte": 1,
+      "editie": 4,
+      "detalii": "Jocul tronurilor in continentul Westeros, plin de tradari si intrigi.",
+      "rating": 9.5,
+      "serie": "SER-ASOIAF",
+      "formatFisier": "EPUB",
+      "areDrm": true
+    },
+    {
+      "tip": "CarteDigitala",
+      "titlu": "The Way of Kings",
+      "autori": [
+        "Brandon Sanderson"
+      ],
+      "isbn": "ISBN-CD-012",
+      "volum": 1,
+      "parte": 1,
+      "editie": 2,
+      "detalii": "Primul volum din epic-fantasy Stormlight Archive.",
+      "rating": 9.6,
+      "serie": "SER-STORMLIGHT",
+      "formatFisier": "EPUB",
+      "areDrm": false
+    },
+    {
+      "tip": "CarteDigitala",
+      "titlu": "Mistborn: The Final Empire",
+      "autori": [
+        "Brandon Sanderson"
+      ],
+      "isbn": "ISBN-CD-013",
+      "volum": 1,
+      "parte": 1,
+      "editie": 3,
+      "detalii": "O echipa de hoti incearca sa rastoarne un lord nemuritor.",
+      "rating": 9.4,
+      "serie": "SER-MISTBORN",
+      "formatFisier": "EPUB",
+      "areDrm": false
+    },
+    {
+      "tip": "CarteDigitala",
+      "titlu": "Hyperion",
+      "autori": [
+        "Dan Simmons"
+      ],
+      "isbn": "ISBN-CD-014",
+      "volum": 1,
+      "parte": 1,
+      "editie": 2,
+      "detalii": "Sapte pelegrini isi spun povestile pe drumul spre misteriosul Shrike.",
+      "rating": 9.5,
+      "serie": "SER-HYPERION",
+      "formatFisier": "PDF",
+      "areDrm": false
+    },
+    {
+      "tip": "CarteDigitala",
+      "titlu": "Ender's Game",
+      "autori": [
+        "Orson Scott Card"
+      ],
+      "isbn": "ISBN-CD-015",
+      "volum": 1,
+      "parte": 1,
+      "editie": 3,
+      "detalii": "Un copil genial este antrenat pentru a salva omenirea de extraterestri.",
+      "rating": 9.3,
+      "serie": "SER-ENDER",
+      "formatFisier": "EPUB",
+      "areDrm": false
+    },
+    {
+      "tip": "CarteDigitala",
+      "titlu": "The Martian",
+      "autori": [
+        "Andy Weir"
+      ],
+      "isbn": "ISBN-CD-016",
+      "volum": 1,
+      "parte": 1,
+      "editie": 2,
+      "detalii": "Un astronaut supravietuieste singur pe Marte folosind stiinta.",
+      "rating": 9.0,
+      "serie": "STANDALONE",
+      "formatFisier": "EPUB",
+      "areDrm": true
+    },
+    {
+      "tip": "CarteDigitala",
+      "titlu": "Project Hail Mary",
+      "autori": [
+        "Andy Weir"
+      ],
+      "isbn": "ISBN-CD-017",
+      "volum": 1,
+      "parte": 1,
+      "editie": 1,
+      "detalii": "Un om fara memorie trebuie sa salveze Pamantul dintr-o calatorie spatiala solitara.",
+      "rating": 9.7,
+      "serie": "STANDALONE",
+      "formatFisier": "EPUB",
+      "areDrm": false
+    },
+    {
+      "tip": "CarteDigitala",
+      "titlu": "Sapiens: O scurta istorie a omenirii",
+      "autori": [
+        "Yuval Noah Harari"
+      ],
+      "isbn": "ISBN-CD-018",
+      "volum": 1,
+      "parte": 1,
+      "editie": 4,
+      "detalii": "Istoria speciei umane de la primii hominizi la era digitala.",
+      "rating": 9.1,
+      "serie": "STANDALONE",
+      "formatFisier": "PDF",
+      "areDrm": true
+    },
+    {
+      "tip": "CarteDigitala",
+      "titlu": "The Lord of the Rings: The Fellowship of the Ring",
+      "autori": [
+        "J.R.R. Tolkien"
+      ],
+      "isbn": "ISBN-CD-019",
+      "volum": 1,
+      "parte": 1,
+      "editie": 7,
+      "detalii": "Frodo si tovarasii sai pornesc sa distruga Inelul Stapanului.",
+      "rating": 9.9,
+      "serie": "SER-LOTR",
+      "formatFisier": "EPUB",
+      "areDrm": false
+    },
+    {
+      "tip": "CarteDigitala",
+      "titlu": "Harry Potter si Piatra Filozofala",
+      "autori": [
+        "J.K. Rowling"
+      ],
+      "isbn": "ISBN-CD-020",
+      "volum": 1,
+      "parte": 1,
+      "editie": 5,
+      "detalii": "Primul an al lui Harry Potter la Scoala de vrajitorie Hogwarts.",
+      "rating": 9.4,
+      "serie": "SER-HP",
+      "formatFisier": "EPUB",
+      "areDrm": true
+    },
+    {
+      "tip": "Audiobook",
+      "titlu": "The Hobbit",
+      "autori": [
+        "J.R.R. Tolkien"
+      ],
+      "isbn": "ISBN-AB-001",
+      "volum": 1,
+      "parte": 1,
+      "editie": 3,
+      "detalii": "Bilbo Baggins porneste intr-o aventura cu o ceata de pitici.",
+      "rating": 9.7,
+      "serie": "SER-MIDDLEEARTH",
+      "narator": "Andy Serkis",
+      "durataMinute": 690
+    },
+    {
+      "tip": "Audiobook",
+      "titlu": "Atomic Habits",
+      "autori": [
+        "James Clear"
+      ],
+      "isbn": "ISBN-AB-002",
+      "volum": 1,
+      "parte": 1,
+      "editie": 2,
+      "detalii": "Ghid practic pentru a-ti construi obiceiuri bune si a le elimina pe cele rele.",
+      "rating": 9.2,
+      "serie": "STANDALONE",
+      "narator": "James Clear",
+      "durataMinute": 336
+    },
+    {
+      "tip": "Audiobook",
+      "titlu": "Thinking, Fast and Slow",
+      "autori": [
+        "Daniel Kahneman"
+      ],
+      "isbn": "ISBN-AB-003",
+      "volum": 1,
+      "parte": 1,
+      "editie": 2,
+      "detalii": "Despre cele doua sisteme de gandire si cum ne influenteaza deciziile.",
+      "rating": 9.0,
+      "serie": "STANDALONE",
+      "narator": "Patrick Egan",
+      "durataMinute": 1069
+    },
+    {
+      "tip": "Audiobook",
+      "titlu": "The Subtle Art of Not Giving a F*ck",
+      "autori": [
+        "Mark Manson"
+      ],
+      "isbn": "ISBN-AB-004",
+      "volum": 1,
+      "parte": 1,
+      "editie": 1,
+      "detalii": "O abordare contraintuitiva pentru o viata buna.",
+      "rating": 8.5,
+      "serie": "STANDALONE",
+      "narator": "Roger Wayne",
+      "durataMinute": 274
+    },
+    {
+      "tip": "Audiobook",
+      "titlu": "Educated",
+      "autori": [
+        "Tara Westover"
+      ],
+      "isbn": "ISBN-AB-005",
+      "volum": 1,
+      "parte": 1,
+      "editie": 1,
+      "detalii": "Memorii despre o fata crescuta fara educatie formala care ajunge la Cambridge.",
+      "rating": 9.3,
+      "serie": "STANDALONE",
+      "narator": "Julia Whelan",
+      "durataMinute": 462
+    },
+    {
+      "tip": "Audiobook",
+      "titlu": "Born a Crime",
+      "autori": [
+        "Trevor Noah"
+      ],
+      "isbn": "ISBN-AB-006",
+      "volum": 1,
+      "parte": 1,
+      "editie": 1,
+      "detalii": "Povestea copilariei lui Trevor Noah in Africa de Sud sub apartheid.",
+      "rating": 9.4,
+      "serie": "STANDALONE",
+      "narator": "Trevor Noah",
+      "durataMinute": 441
+    },
+    {
+      "tip": "Audiobook",
+      "titlu": "The Power of Now",
+      "autori": [
+        "Eckhart Tolle"
+      ],
+      "isbn": "ISBN-AB-007",
+      "volum": 1,
+      "parte": 1,
+      "editie": 3,
+      "detalii": "Ghid spiritual pentru iluminare si traitul in momentul prezent.",
+      "rating": 8.7,
+      "serie": "STANDALONE",
+      "narator": "Eckhart Tolle",
+      "durataMinute": 300
+    },
+    {
+      "tip": "Audiobook",
+      "titlu": "Becoming",
+      "autori": [
+        "Michelle Obama"
+      ],
+      "isbn": "ISBN-AB-008",
+      "volum": 1,
+      "parte": 1,
+      "editie": 1,
+      "detalii": "Memoriile fostei Prime Doamne a Statelor Unite ale Americii.",
+      "rating": 9.1,
+      "serie": "STANDALONE",
+      "narator": "Michelle Obama",
+      "durataMinute": 1140
+    },
+    {
+      "tip": "Audiobook",
+      "titlu": "The Alchemist",
+      "autori": [
+        "Paulo Coelho"
+      ],
+      "isbn": "ISBN-AB-009",
+      "volum": 1,
+      "parte": 1,
+      "editie": 4,
+      "detalii": "Calatoria unui cioban tanar in cautarea comoarei sale personale.",
+      "rating": 8.9,
+      "serie": "STANDALONE",
+      "narator": "Jeremy Irons",
+      "durataMinute": 210
+    },
+    {
+      "tip": "Audiobook",
+      "titlu": "Dune Messiah",
+      "autori": [
+        "Frank Herbert"
+      ],
+      "isbn": "ISBN-AB-010",
+      "volum": 2,
+      "parte": 1,
+      "editie": 2,
+      "detalii": "Versiunea audio a celui de-al doilea roman din seria Dune.",
+      "rating": 8.8,
+      "serie": "SER-DUNE",
+      "narator": "Scott Brick",
+      "durataMinute": 518
+    },
+    {
+      "tip": "MangaComics",
+      "titlu": "Berserk Vol. 1",
+      "autori": [
+        "Kentaro Miura"
+      ],
+      "isbn": "ISBN-MC-001",
+      "volum": 1,
+      "parte": 1,
+      "editie": 2,
+      "detalii": "Dark fantasy despre Guts, un razboinic singur cu o sabie uriasa.",
+      "rating": 9.9,
+      "serie": "SER-BERSERK",
+      "stilDesen": "Manga",
+      "esteColor": false
+    },
+    {
+      "tip": "MangaComics",
+      "titlu": "Attack on Titan Vol. 1",
+      "autori": [
+        "Hajime Isayama"
+      ],
+      "isbn": "ISBN-MC-002",
+      "volum": 1,
+      "parte": 1,
+      "editie": 1,
+      "detalii": "Omenirea supravietuieste in spatele unor ziduri uriase pentru a se apara de titani.",
+      "rating": 9.6,
+      "serie": "SER-AOT",
+      "stilDesen": "Manga",
+      "esteColor": false
+    },
+    {
+      "tip": "MangaComics",
+      "titlu": "Fullmetal Alchemist Vol. 1",
+      "autori": [
+        "Hiromu Arakawa"
+      ],
+      "isbn": "ISBN-MC-003",
+      "volum": 1,
+      "parte": 1,
+      "editie": 3,
+      "detalii": "Doi frati alchimisti cauta Piatra Filosofala pentru a-si recupera corpurile.",
+      "rating": 9.7,
+      "serie": "SER-FMA",
+      "stilDesen": "Manga",
+      "esteColor": false
+    },
+    {
+      "tip": "MangaComics",
+      "titlu": "One Piece Vol. 1",
+      "autori": [
+        "Eiichiro Oda"
+      ],
+      "isbn": "ISBN-MC-004",
+      "volum": 1,
+      "parte": 1,
+      "editie": 2,
+      "detalii": "Monkey D. Luffy porneste in cautarea comorii legendare One Piece.",
+      "rating": 9.5,
+      "serie": "SER-ONEPIECE",
+      "stilDesen": "Manga",
+      "esteColor": false
+    },
+    {
+      "tip": "MangaComics",
+      "titlu": "Vagabond Vol. 1",
+      "autori": [
+        "Takehiko Inoue"
+      ],
+      "isbn": "ISBN-MC-005",
+      "volum": 1,
+      "parte": 1,
+      "editie": 1,
+      "detalii": "Povestea samuraiului Miyamoto Musashi, cel mai puternic razboinic din Japonia.",
+      "rating": 9.8,
+      "serie": "SER-VAGABOND",
+      "stilDesen": "Manga",
+      "esteColor": false
+    },
+    {
+      "tip": "MangaComics",
+      "titlu": "Watchmen",
+      "autori": [
+        "Alan Moore",
+        "Dave Gibbons"
+      ],
+      "isbn": "ISBN-MC-006",
+      "volum": 1,
+      "parte": 1,
+      "editie": 4,
+      "detalii": "Supereroi pensionati reinvestigheaza crima unui coleg, descoperind conspiratii.",
+      "rating": 9.9,
+      "serie": "STANDALONE",
+      "stilDesen": "DC",
+      "esteColor": true
+    },
+    {
+      "tip": "MangaComics",
+      "titlu": "Maus: A Survivor's Tale",
+      "autori": [
+        "Art Spiegelman"
+      ],
+      "isbn": "ISBN-MC-007",
+      "volum": 1,
+      "parte": 1,
+      "editie": 3,
+      "detalii": "Povestea Holocaustului spusa prin metafora pisicilor si soarecilor.",
+      "rating": 9.8,
+      "serie": "STANDALONE",
+      "stilDesen": "Comics",
+      "esteColor": false
+    },
+    {
+      "tip": "MangaComics",
+      "titlu": "V for Vendetta",
+      "autori": [
+        "Alan Moore",
+        "David Lloyd"
+      ],
+      "isbn": "ISBN-MC-008",
+      "volum": 1,
+      "parte": 1,
+      "editie": 2,
+      "detalii": "Un anarhist mascat lupta impotriva unui regim fascist in Anglia viitorului.",
+      "rating": 9.6,
+      "serie": "STANDALONE",
+      "stilDesen": "Comics",
+      "esteColor": false
+    },
+    {
+      "tip": "MangaComics",
+      "titlu": "Demon Slayer Vol. 1",
+      "autori": [
+        "Koyoharu Gotouge"
+      ],
+      "isbn": "ISBN-MC-009",
+      "volum": 1,
+      "parte": 1,
+      "editie": 1,
+      "detalii": "Tanjiro Kamado devine vanator de demoni pentru a-si salva sora transformata.",
+      "rating": 9.3,
+      "serie": "SER-DEMONSLAYER",
+      "stilDesen": "Manga",
+      "esteColor": false
+    },
+    {
+      "tip": "MangaComics",
+      "titlu": "Vinland Saga Vol. 1",
+      "autori": [
+        "Makoto Yukimura"
+      ],
+      "isbn": "ISBN-MC-010",
+      "volum": 1,
+      "parte": 1,
+      "editie": 1,
+      "detalii": "Thorfinn, un tanar viking, cauta razbunare pentru uciderea tatalui sau.",
+      "rating": 9.5,
+      "serie": "SER-VINLAND",
+      "stilDesen": "Manga",
+      "esteColor": false
+    },
+    {
+      "tip": "FilmCarte",
+      "titlu": "The Godfather",
+      "autori": [
+        "Mario Puzo",
+        "Francis Ford Coppola"
+      ],
+      "isbn": "ISBN-FC-001",
+      "volum": 1,
+      "parte": 1,
+      "editie": 1,
+      "detalii": "Povestea familiei mafiote Corleone si lupta pentru putere.",
+      "rating": 9.2,
+      "serie": "SER-GODFATHER",
+      "regizor": "Francis Ford Coppola",
+      "anLansare": 1972
+    },
+    {
+      "tip": "FilmCarte",
+      "titlu": "Schindler's List",
+      "autori": [
+        "Steven Spielberg",
+        "Thomas Keneally"
+      ],
+      "isbn": "ISBN-FC-002",
+      "volum": 1,
+      "parte": 1,
+      "editie": 1,
+      "detalii": "Povestea lui Oskar Schindler care salveaza evrei in timpul Holocaustului.",
+      "rating": 9.0,
+      "serie": "STANDALONE",
+      "regizor": "Steven Spielberg",
+      "anLansare": 1993
+    },
+    {
+      "tip": "FilmCarte",
+      "titlu": "Interstellar",
+      "autori": [
+        "Christopher Nolan",
+        "Jonathan Nolan"
+      ],
+      "isbn": "ISBN-FC-003",
+      "volum": 1,
+      "parte": 1,
+      "editie": 1,
+      "detalii": "O echipa de astronauti calatoreste prin o gaura de vierme pentru a salva omenirea.",
+      "rating": 8.7,
+      "serie": "STANDALONE",
+      "regizor": "Christopher Nolan",
+      "anLansare": 2014
+    },
+    {
+      "tip": "FilmCarte",
+      "titlu": "The Dark Knight",
+      "autori": [
+        "Christopher Nolan",
+        "Jonathan Nolan"
+      ],
+      "isbn": "ISBN-FC-004",
+      "volum": 2,
+      "parte": 1,
+      "editie": 1,
+      "detalii": "Batman se confrunta cu Joker, un agent al haosului si distructiei.",
+      "rating": 9.0,
+      "serie": "SER-DARKKNIGHTTRILOGY",
+      "regizor": "Christopher Nolan",
+      "anLansare": 2008
+    },
+    {
+      "tip": "FilmCarte",
+      "titlu": "Pulp Fiction",
+      "autori": [
+        "Quentin Tarantino",
+        "Roger Avary"
+      ],
+      "isbn": "ISBN-FC-005",
+      "volum": 1,
+      "parte": 1,
+      "editie": 1,
+      "detalii": "Povesti interconectate despre criminali, droguri si rasturnari de situatie.",
+      "rating": 8.9,
+      "serie": "STANDALONE",
+      "regizor": "Quentin Tarantino",
+      "anLansare": 1994
+    },
+    {
+      "tip": "FilmCarte",
+      "titlu": "The Matrix",
+      "autori": [
+        "Lilly Wachowski",
+        "Lana Wachowski"
+      ],
+      "isbn": "ISBN-FC-006",
+      "volum": 1,
+      "parte": 1,
+      "editie": 2,
+      "detalii": "Un hacker descopera ca lumea e o simulare controlata de masini.",
+      "rating": 8.7,
+      "serie": "SER-MATRIX",
+      "regizor": "Lilly Wachowski",
+      "anLansare": 1999
+    },
+    {
+      "tip": "FilmCarte",
+      "titlu": "Inception",
+      "autori": [
+        "Christopher Nolan"
+      ],
+      "isbn": "ISBN-FC-007",
+      "volum": 1,
+      "parte": 1,
+      "editie": 1,
+      "detalii": "Un hot de vise trebuie sa planteze o idee in mintea unui CEO.",
+      "rating": 8.8,
+      "serie": "STANDALONE",
+      "regizor": "Christopher Nolan",
+      "anLansare": 2010
+    },
+    {
+      "tip": "FilmCarte",
+      "titlu": "Parasite",
+      "autori": [
+        "Bong Joon-ho"
+      ],
+      "isbn": "ISBN-FC-008",
+      "volum": 1,
+      "parte": 1,
+      "editie": 1,
+      "detalii": "O familie saraca se infiltreaza in viata unei familii bogate cu consecinte dramatice.",
+      "rating": 8.5,
+      "serie": "STANDALONE",
+      "regizor": "Bong Joon-ho",
+      "anLansare": 2019
+    },
+    {
+      "tip": "FilmCarte",
+      "titlu": "2001: A Space Odyssey",
+      "autori": [
+        "Stanley Kubrick",
+        "Arthur C. Clarke"
+      ],
+      "isbn": "ISBN-FC-009",
+      "volum": 1,
+      "parte": 1,
+      "editie": 2,
+      "detalii": "O odisee spatiala despre evolutia umanitatii si inteligenta artificiala HAL 9000.",
+      "rating": 8.6,
+      "serie": "STANDALONE",
+      "regizor": "Stanley Kubrick",
+      "anLansare": 1968
+    },
+    {
+      "tip": "FilmCarte",
+      "titlu": "Spirited Away",
+      "autori": [
+        "Hayao Miyazaki"
+      ],
+      "isbn": "ISBN-FC-010",
+      "volum": 1,
+      "parte": 1,
+      "editie": 1,
+      "detalii": "O fetita se pierde intr-o lume spiritista si trebuie sa lucreze pentru a-si elibera parintii.",
+      "rating": 9.3,
+      "serie": "STANDALONE",
+      "regizor": "Hayao Miyazaki",
+      "anLansare": 2001
+    }
+  ]
+}

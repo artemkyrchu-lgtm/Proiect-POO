@@ -14,7 +14,9 @@ public:
                   std::string format, bool drm);
 
     void afisareDetalii() const override;
-    std::string getTip() const override { return "Carte Digitala"; }
+    std::string getTip() const override { return "CarteDigitala"; }
+    std::string getExtra1() const override { return formatFisier; }
+    bool getExtraBool() const override { return areDrm; }
 };
 
 #endif

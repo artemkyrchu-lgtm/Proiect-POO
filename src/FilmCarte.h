@@ -14,7 +14,9 @@ public:
               std::string reg, int an);
 
     void afisareDetalii() const override;
-    std::string getTip() const override { return "Film"; }
+    std::string getTip() const override { return "FilmCarte"; }
+    std::string getExtra1() const override { return regizor; }
+    int getExtraInt() const override { return anLansare; }
 };
 
 #endif

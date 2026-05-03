@@ -1,7 +1,7 @@
 CXX = g++
 CXXFLAGS = -std=c++17 -Wall -Wextra
 
-SRCS = main.cpp Carte.cpp CarteDigitala.cpp Audiobook.cpp MangaComics.cpp FilmCarte.cpp Biblioteca.cpp Utilizator.cpp
+SRCS = main.cpp Carte.cpp CarteDigitala.cpp Audiobook.cpp MangaComics.cpp FilmCarte.cpp Biblioteca.cpp Utilizator.cpp Database.cpp
 OBJS = $(SRCS:.cpp=.o)
 TARGET = biblioteca
 
