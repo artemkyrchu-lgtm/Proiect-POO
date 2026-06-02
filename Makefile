@@ -15,5 +15,14 @@ $(TARGET):$(OBJ)
 run: $(TARGET)
 	./$(TARGET)
 
+server: server_cpp.cpp
+	$(CXX) -std=c++17 -O2 server_cpp.cpp -o server_cpp -lpthread
+
+server-ssl: server_cpp.cpp
+	$(CXX) -std=c++17 -O2 -DHAVE_SSL server_cpp.cpp -o server_cpp -lssl -lcrypto -lpthread
+
+run-server: server
+	./server_cpp
+
 clean:
-	rm -f src/*.o $(TARGET)
+	rm -f src/*.o $(TARGET) server_cpp

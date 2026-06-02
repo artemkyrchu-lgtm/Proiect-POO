@@ -1256,9 +1256,9 @@ async function doApiSearch() {
       box.innerHTML = `<div class="api-key-warning">
         ⚠️ <strong>Cheia OMDB nu e configurata.</strong><br>
         1. Obtine o cheie gratuita la <strong>omdbapi.com/apikey.aspx</strong><br>
-        2. Deschide <code>web/server.js</code><br>
-        3. Inlocuieste <code>YOUR_OMDB_KEY</code> cu cheia ta<br>
-        4. Reporneste serverul
+        2. Deschide <code>server_cpp.cpp</code><br>
+        3. Inlocuieste <code>YOUR_OMDB_KEY</code> cu cheia ta pe linia: <code>std::string OMDB_KEY = "YOUR_OMDB_KEY";</code><br>
+        4. Ruleaza <code>make server-ssl</code> si reporneste serverul
       </div>`;
     } else {
       box.innerHTML = `<div class="api-empty">❌ ${esc(err.message)}</div>`;
