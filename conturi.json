@@ -1,0 +1,84 @@
+{
+  "conturi": [
+    {
+      "username": "admin",
+      "parola": "1234",
+      "esteAdmin": true,
+      "nume": "Ion",
+      "prenume": "Popescu",
+      "dataNasterii": "01.01.1980",
+      "imprumuturi": [
+        {
+          "titlu": "Haikyuu!!",
+          "dataImprumut": "2026-06-02",
+          "dataReturnare": "2026-06-16"
+        }
+      ],
+      "favorite": [
+        "Attack on Titan",
+        "1984"
+      ],
+      "functie": "Director",
+      "salariu": 900
+    },
+    {
+      "username": "user",
+      "parola": "1234",
+      "esteAdmin": false,
+      "nume": "Maria",
+      "prenume": "Ionescu",
+      "dataNasterii": "15.06.1995",
+      "imprumuturi": [
+        {
+          "titlu": "Batman: The Dark Knight Returns",
+          "dataImprumut": "2026-06-02",
+          "dataReturnare": "2026-06-16"
+        },
+        {
+          "titlu": "Noblesse",
+          "dataImprumut": "2026-06-02",
+          "dataReturnare": "2026-06-16"
+        },
+        {
+          "titlu": "V for Vendetta",
+          "dataImprumut": "2026-06-02",
+          "dataReturnare": "2026-06-16"
+        }
+      ]
+    },
+    {
+      "username": "darks1dedd",
+      "parola": "1234",
+      "esteAdmin": false,
+      "nume": "Kyrchu",
+      "prenume": "Artem",
+      "dataNasterii": "01.01.2000",
+      "imprumuturi": []
+    },
+    {
+      "username": "MaksAdmin",
+      "parola": "1234",
+      "esteAdmin": true,
+      "nume": "Yatkso",
+      "prenume": "Maksym",
+      "dataNasterii": "11.08.2000",
+      "email": "email@biblioteca.ro",
+      "telefon": "893128398123",
+      "functie": "Administrator Sistem",
+      "imprumuturi": []
+    },
+    {
+      "username": "Director",
+      "parola": "1234",
+      "esteAdmin": true,
+      "nume": "Kyrchu",
+      "prenume": "Artem",
+      "dataNasterii": "11.08.2000",
+      "email": "email@biblioteca.ro",
+      "telefon": "321321313",
+      "functie": "Director",
+      "imprumuturi": [],
+      "favorite": []
+    }
+  ]
+}

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Biblioteca</title>
+  <script>document.documentElement.setAttribute('data-theme', localStorage.getItem('theme') || 'dark');</script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div id="toast"></div>
+
+  <!-- ── AUTH OVERLAY ── -->
+  <div id="auth-overlay">
+    <div class="auth-box">
+      <div class="auth-logo">📚 Biblioteca</div>
+      <div id="auth-tabs">
+        <button class="auth-tab active" data-tab="login" data-i18n="tab_login">Login</button>
+        <button class="auth-tab" data-tab="register" data-i18n="tab_register">Cont nou</button>
+        <button class="auth-tab" data-tab="register-admin">🔑 Admin</button>
+      </div>
+
+      <!-- Login -->
+      <form id="login-form" class="auth-form">
+        <div class="field">
+          <label data-i18n="lbl_username">Username</label>
+          <input type="text" id="login-username" data-i18n-ph="ph_username" placeholder="username" autocomplete="username" />
+        </div>
+        <div class="field">
+          <label data-i18n="lbl_parola">Parola</label>
+          <input type="password" id="login-parola" placeholder="••••••••" autocomplete="current-password" />
+        </div>
+        <button type="submit" class="btn-primary full" data-i18n="btn_connect">Conecteaza-te</button>
+        <p class="auth-hint">Demo: <code>user / 1234</code> sau <code>admin / 1234</code></p>
+      </form>
+
+      <!-- Register user -->
+      <form id="register-form" class="auth-form hidden">
+        <div class="field-row">
+          <div class="field"><label data-i18n="lbl_prenume">Prenume</label><input type="text" id="reg-prenume" data-i18n-ph="ph_prenume" placeholder="Ion" /></div>
+          <div class="field"><label data-i18n="lbl_nume">Nume</label><input type="text" id="reg-nume" data-i18n-ph="ph_nume" placeholder="Popescu" /></div>
+        </div>
+        <div class="field"><label data-i18n="lbl_username">Username</label><input type="text" id="reg-username" data-i18n-ph="ph_username" placeholder="username" autocomplete="username" /></div>
+        <div class="field"><label data-i18n="lbl_parola">Parola</label><input type="password" id="reg-parola" placeholder="••••••••" autocomplete="new-password" /></div>
+        <div class="field"><label data-i18n="lbl_data">Data nasterii</label><input type="text" id="reg-data" placeholder="DD.MM.YYYY" /></div>
+        <button type="submit" class="btn-primary full" data-i18n="btn_create_account">Creeaza cont</button>
+      </form>
+
+      <!-- Register admin -->
+      <form id="register-admin-form" class="auth-form hidden">
+        <div class="admin-reg-banner" data-i18n="admin_reg_banner">🔑 Cont Administrator</div>
+        <div class="field-row">
+          <div class="field"><label data-i18n="lbl_prenume">Prenume</label><input type="text" id="adm-prenume" data-i18n-ph="ph_prenume" placeholder="Ion" /></div>
+          <div class="field"><label data-i18n="lbl_nume">Nume</label><input type="text" id="adm-nume" data-i18n-ph="ph_nume" placeholder="Popescu" /></div>
+        </div>
+        <div class="field"><label data-i18n="lbl_username">Username</label><input type="text" id="adm-username" data-i18n-ph="ph_username" placeholder="username" autocomplete="username" /></div>
+        <div class="field"><label data-i18n="lbl_parola">Parola</label><input type="password" id="adm-parola" placeholder="••••••••" autocomplete="new-password" /></div>
+        <div class="field-row">
+          <div class="field"><label data-i18n="lbl_data">Data nasterii</label><input type="text" id="adm-data" placeholder="DD.MM.YYYY" /></div>
+          <div class="field"><label data-i18n="lbl_telefon">Telefon</label><input type="text" id="adm-telefon" data-i18n-ph="ph_telefon" placeholder="07xx xxx xxx" /></div>
+        </div>
+        <div class="field"><label data-i18n="lbl_email">Email</label><input type="email" id="adm-email" data-i18n-ph="ph_email" placeholder="email@biblioteca.ro" /></div>
+        <div class="field">
+          <label data-i18n="lbl_functie">Functie</label>
+          <select id="adm-functie">
+            <option value="Bibliotecar">Bibliotecar</option>
+            <option value="Bibliotecar Sef">Bibliotecar Sef</option>
+            <option value="Administrator Sistem">Administrator Sistem</option>
+            <option value="Manager">Manager</option>
+            <option value="Director">Director</option>
+            <option value="Alt rol">Alt rol</option>
+          </select>
+        </div>
+        <div class="field">
+          <label data-i18n="lbl_access_code">Cod de acces admin</label>
+          <input type="password" id="adm-cod" data-i18n-ph="ph_access_code" placeholder="Codul secret de inregistrare" />
+          <span class="field-hint" data-i18n="hint_access_code">Cereti codul de la un admin existent.</span>
+        </div>
+        <button type="submit" class="btn-primary full" style="background:var(--manga)" data-i18n="btn_create_admin">Creeaza cont Admin</button>
+      </form>
+
+      <button id="browse-guest" class="btn-ghost full" style="margin-top:8px" data-i18n="btn_guest">Continua fara cont →</button>
+    </div>
+  </div>
+
+  <!-- ── MAIN APP ── -->
+  <div id="app" class="hidden">
+    <nav id="navbar">
+      <div class="nav-logo">📚 Biblioteca</div>
+      <div class="nav-links">
+        <button class="nav-btn active" data-view="library" data-i18n="nav_catalog">Catalog</button>
+        <button class="nav-btn" data-view="mybooks" id="nav-mybooks" data-i18n="nav_mybooks">Cartile mele</button>
+        <button class="nav-btn admin-only hidden" data-view="admin" data-i18n="nav_admin">Admin</button>
+      </div>
+      <div class="nav-user">
+        <span id="nav-username"></span>
+        <div class="lang-btns">
+          <button class="lang-btn active" data-lang="ro">RO</button>
+          <button class="lang-btn" data-lang="en">EN</button>
+          <button class="lang-btn" data-lang="uk">UA</button>
+        </div>
+        <button id="theme-toggle" class="btn-ghost small icon-btn" onclick="toggleTheme()">🌙</button>
+        <button id="logout-btn" class="btn-ghost small" data-i18n="btn_logout">Logout</button>
+        <button id="login-shortcut" class="btn-primary small hidden" data-i18n="btn_login">Login</button>
+      </div>
+    </nav>
+
+    <main>
+
+      <!-- LIBRARY VIEW -->
+      <div id="view-library">
+        <div class="hero">
+          <h1 data-i18n="hero_title">Bun venit în Bibliotecă</h1>
+          <p class="hero-sub" data-i18n="hero_sub">200 de titluri — carti digitale, audiobook-uri, manga si filme</p>
+          <div class="search-bar">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="search-input" data-i18n-ph="search_ph" placeholder="Cauta dupa titlu, autor sau serie..." />
+            <button id="search-clear" class="hidden">✕</button>
+          </div>
+        </div>
+        <div class="filters">
+          <button class="filter-btn active" data-tip="all"><span data-i18n="filter_all">Toate</span> <span class="count" id="count-all"></span></button>
+          <button class="filter-btn" data-tip="CarteDigitala">📱 <span data-i18n="filter_digital">Digital</span> <span class="count" id="count-CarteDigitala"></span></button>
+          <button class="filter-btn" data-tip="Audiobook">🎧 <span data-i18n="filter_audio">Audiobook</span> <span class="count" id="count-Audiobook"></span></button>
+          <button class="filter-btn" data-tip="MangaComics">📖 <span data-i18n="filter_manga">Manga</span> <span class="count" id="count-MangaComics"></span></button>
+          <button class="filter-btn" data-tip="FilmCarte">🎬 <span data-i18n="filter_film">Film</span> <span class="count" id="count-FilmCarte"></span></button>
+          <button class="filter-btn" data-tip="favorites">❤️ <span data-i18n="filter_fav">Favorite</span> <span class="count" id="count-favorites"></span></button>
+        </div>
+
+        <!-- Recommendations -->
+        <div id="reco-section" class="hidden"></div>
+
+        <!-- Sort & advanced filters -->
+        <div class="sort-bar">
+          <select id="sort-select" onchange="applySort(this.value)">
+            <option value="default" data-i18n-opt="sort_default">Sortare: Implicita</option>
+            <option value="az" data-i18n-opt="sort_az">A → Z</option>
+            <option value="za" data-i18n-opt="sort_za">Z → A</option>
+            <option value="rating-desc" data-i18n-opt="sort_rating_desc">★ Rating descrescator</option>
+            <option value="rating-asc" data-i18n-opt="sort_rating_asc">★ Rating crescator</option>
+            <option value="newest" data-i18n-opt="sort_newest">An: Nou → Vechi</option>
+            <option value="oldest" data-i18n-opt="sort_oldest">An: Vechi → Nou</option>
+          </select>
+          <button class="btn-ghost small" id="adv-filter-btn" onclick="toggleAdvFilters()" data-i18n="btn_adv_filter">⚙ Filtru avansat</button>
+          <button class="btn-ghost small hidden" id="reset-adv-btn" onclick="resetAdvFilters()" style="color:var(--danger);border-color:rgba(248,113,113,0.4)" data-i18n="btn_reset_filters">✕ Reset filtre</button>
+        </div>
+
+        <div id="advanced-filters" class="hidden">
+          <div class="adv-filter-panel">
+            <div class="adv-section">
+              <div class="adv-label" data-i18n="lbl_exclude">Exclude tipuri</div>
+              <div class="adv-checks">
+                <label><input type="checkbox" value="CarteDigitala" onchange="applyExclude()"> 📱 <span data-i18n="filter_digital">Digital</span></label>
+                <label><input type="checkbox" value="Audiobook" onchange="applyExclude()"> 🎧 <span data-i18n="filter_audio">Audiobook</span></label>
+                <label><input type="checkbox" value="MangaComics" onchange="applyExclude()"> 📖 <span data-i18n="filter_manga">Manga</span></label>
+                <label><input type="checkbox" value="FilmCarte" onchange="applyExclude()"> 🎬 <span data-i18n="filter_film">Film</span></label>
+              </div>
+            </div>
+            <div class="adv-section">
+              <div class="adv-label"><span data-i18n="lbl_min_rating">Rating minim</span>: <span id="rating-val">0.0</span> ★</div>
+              <input type="range" id="rating-range" min="0" max="10" step="0.5" value="0" oninput="applyRating(this.value)" />
+            </div>
+          </div>
+        </div>
+
+        <div id="results-info" class="results-info hidden"></div>
+        <div id="books-grid" class="books-grid"></div>
+        <div id="empty-state" class="empty-state hidden">
+          <div class="empty-icon">🔍</div>
+          <p data-i18n="no_results">Niciun rezultat gasit.</p>
+        </div>
+      </div>
+
+      <!-- MY BOOKS VIEW -->
+      <div id="view-mybooks" class="hidden">
+        <div class="page-header">
+          <h2 data-i18n="nav_mybooks">Cartile mele</h2>
+          <p id="mybooks-subtitle"></p>
+        </div>
+        <div id="mybooks-list" class="books-grid"></div>
+        <div id="mybooks-empty" class="empty-state hidden">
+          <div class="empty-icon">📭</div>
+          <p data-i18n="mybooks_empty">Nu ai nicio carte imprumutata.</p>
+          <button class="btn-primary" onclick="showView('library')" data-i18n="btn_go_catalog">Mergi la catalog</button>
+        </div>
+      </div>
+
+      <!-- ADMIN VIEW -->
+      <div id="view-admin" class="hidden">
+        <div class="page-header">
+          <h2 data-i18n="admin_panel">Panou Admin</h2>
+        </div>
+
+        <!-- Stats bar -->
+        <div class="admin-stats" id="admin-stats"></div>
+
+        <div class="admin-grid">
+          <!-- Add book -->
+          <div class="admin-panel">
+            <h3 data-i18n="add_book_title">Adauga carte</h3>
+
+            <!-- Mode switcher -->
+            <div class="add-mode-tabs">
+              <button class="add-mode-tab active" data-mode="api" data-i18n="tab_api">🔍 Cauta cu API</button>
+              <button class="add-mode-tab" data-mode="manual" data-i18n="tab_manual">✏️ Manual</button>
+            </div>
+
+            <!-- API SEARCH MODE -->
+            <div id="add-mode-api">
+              <div class="api-search-row">
+                <select id="api-type">
+                  <option value="book">📚 Carte / Manga</option>
+                  <option value="film">🎬 Film</option>
+                </select>
+                <input type="text" id="api-query" placeholder="Titlu, autor, regizor..." />
+                <button type="button" class="btn-primary" onclick="doApiSearch()">Cauta</button>
+              </div>
+              <div id="api-results"></div>
+            </div>
+
+            <!-- MANUAL MODE -->
+            <div id="add-mode-manual" class="hidden">
+              <form id="add-book-form">
+                <div class="field">
+                  <label>Tip</label>
+                  <select id="add-tip">
+                    <option value="CarteDigitala">Carte Digitala</option>
+                    <option value="Audiobook">Audiobook</option>
+                    <option value="MangaComics">Manga / Comics</option>
+                    <option value="FilmCarte">Film</option>
+                  </select>
+                </div>
+                <div class="field"><label>Titlu</label><input type="text" id="add-titlu" placeholder="Titlul cartii" /></div>
+                <div class="field">
+                  <label>Autori <small>(separati prin virgula)</small></label>
+                  <input type="text" id="add-autori" placeholder="Autor 1, Autor 2" />
+                </div>
+                <div class="field-row">
+                  <div class="field"><label>ISBN</label><input type="text" id="add-isbn" placeholder="978-..." /></div>
+                  <div class="field"><label>Rating</label><input type="number" id="add-rating" min="0" max="10" step="0.1" placeholder="8.5" /></div>
+                </div>
+                <div class="field-row">
+                  <div class="field"><label>Volum</label><input type="number" id="add-volum" value="1" min="1" /></div>
+                  <div class="field"><label>Parte</label><input type="number" id="add-parte" value="1" min="1" /></div>
+                  <div class="field"><label>Editie</label><input type="number" id="add-editie" value="1" min="1" /></div>
+                  <div class="field"><label>Copii <small>(nr. ex.)</small></label><input type="number" id="add-copii" value="1" min="1" /></div>
+                </div>
+                <div class="field"><label>Serie</label><input type="text" id="add-serie" placeholder="Lasati gol daca nu face parte dintr-o serie" /></div>
+                <div class="field"><label>Detalii</label><textarea id="add-detalii" rows="3" placeholder="Descriere scurta..."></textarea></div>
+                <div class="field">
+                  <label>Coperta <small>(URL imagine — lasati gol pentru auto)</small></label>
+                  <input type="url" id="add-imagine" placeholder="https://..." />
+                </div>
+                <div id="extra-CarteDigitala" class="extra-fields">
+                  <div class="field-row">
+                    <div class="field"><label>Format</label><select id="add-format"><option>EPUB</option><option>PDF</option><option>MOBI</option><option>AZW</option></select></div>
+                    <div class="field"><label>DRM</label><select id="add-drm"><option value="false">Nu</option><option value="true">Da</option></select></div>
+                  </div>
+                </div>
+                <div id="extra-Audiobook" class="extra-fields hidden">
+                  <div class="field-row">
+                    <div class="field"><label>Narator</label><input type="text" id="add-narator" placeholder="Nume narator" /></div>
+                    <div class="field"><label>Durata (min)</label><input type="number" id="add-durata" placeholder="540" min="1" /></div>
+                  </div>
+                </div>
+                <div id="extra-MangaComics" class="extra-fields hidden">
+                  <div class="field-row">
+                    <div class="field"><label>Stil</label><select id="add-stil"><option>Manga</option><option>Marvel</option><option>DC</option></select></div>
+                    <div class="field"><label>Color</label><select id="add-color"><option value="false">Nu</option><option value="true">Da</option></select></div>
+                  </div>
+                </div>
+                <div id="extra-FilmCarte" class="extra-fields hidden">
+                  <div class="field-row">
+                    <div class="field"><label>Regizor</label><input type="text" id="add-regizor" placeholder="Nume regizor" /></div>
+                    <div class="field"><label>An lansare</label><input type="number" id="add-an" placeholder="2024" min="1900" max="2099" /></div>
+                  </div>
+                </div>
+                <button type="submit" class="btn-primary full">Adauga</button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Users -->
+          <div class="admin-panel">
+            <h3 data-i18n="users_title">Utilizatori</h3>
+            <div id="users-list"></div>
+          </div>
+        </div>
+
+        <!-- All books -->
+        <div class="admin-panel" style="margin-top:24px">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px">
+            <h3 style="margin:0" data-i18n="all_books_title">Toate cartile</h3>
+            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+              <button class="btn-primary small" id="fetch-covers-btn" onclick="fetchCovers()" data-i18n="btn_fetch_covers">🖼 Fetch Covers</button>
+              <input type="text" id="admin-search" placeholder="Filtreaza..." class="small-input" style="width:200px" />
+            </div>
+          </div>
+          <div id="admin-books-list"></div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- ── BOOK DETAIL MODAL ── -->
+  <div id="modal-overlay" class="hidden" onclick="closeModal(event)">
+    <div class="modal" id="modal-box">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div id="modal-content"></div>
+    </div>
+  </div>
+
+  <!-- ── EDIT OVERLAY ── -->
+  <div id="edit-overlay" class="hidden" onclick="closeEditOverlay(event)">
+    <div class="modal" id="edit-box">
+      <button class="modal-close" onclick="closeEditOverlay()">✕</button>
+      <div id="edit-content"></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
