@@ -141,10 +141,12 @@ function applyTheme() {
 
 // ── API ───────────────────────────────────────────────────────────────────────
 async function api(method, path, body) {
-  const opts = { method, headers: { 'Content-Type': 'application/json' } };
+  const token = localStorage.getItem('sid');
+  const opts = { method, headers: { 'Content-Type': 'application/json', 'X-Session-Token': token || '' } };
   if (body) opts.body = JSON.stringify(body);
   const res = await fetch(path, opts);
   const data = await res.json().catch(() => ({}));
+  if (data.sid) localStorage.setItem('sid', data.sid);
   if (!res.ok) throw new Error(data.error || 'Eroare server');
   return data;
 }
@@ -285,6 +287,7 @@ document.getElementById('register-form').addEventListener('submit', async e => {
 
 document.getElementById('logout-btn').addEventListener('click', async () => {
   await api('POST', '/api/logout');
+  localStorage.removeItem('sid');
   state.user = null;
   toast('La revedere!');
   showAuthOverlay();
@@ -522,10 +525,10 @@ function bookCard(c, isBorrowed, idx) {
   else if (outOfCopies)
     borrowBtn = `<button class="borrow-btn" disabled style="background:rgba(248,113,113,0.15);color:var(--danger);border:1px solid rgba(248,113,113,0.3);cursor:default">Epuizat</button>`;
   else
-    borrowBtn = `<button class="borrow-btn can-borrow" onclick="event.stopPropagation(); borrowBook('${esc(c.titlu)}')">${t('borrow_btn')}</button>`;
+    borrowBtn = `<button class="borrow-btn can-borrow" onclick="event.stopPropagation(); borrowBook(${jsq(c.titlu)})">${t('borrow_btn')}</button>`;
 
   const heartBtn = state.user
-    ? `<button class="card-heart" onclick="event.stopPropagation(); toggleFavorite('${esc(c.titlu)}')" title="${isFav ? 'Sterge din favorite' : 'Adauga la favorite'}">${isFav ? '❤️' : '🤍'}</button>`
+    ? `<button class="card-heart" onclick="event.stopPropagation(); toggleFavorite(${jsq(c.titlu)})" title="${isFav ? 'Sterge din favorite' : 'Adauga la favorite'}">${isFav ? '❤️' : '🤍'}</button>`
     : '';
 
   const copiesClass = avail <= 0 ? 'avail-out' : avail <= 5 ? 'avail-low' : 'avail-good';
@@ -624,7 +627,7 @@ function renderMyBooks() {
   list.innerHTML = books.map((c, i) => {
     const imp = findBorrowed(c.titlu);
     const isFav = getFavorites().includes(c.titlu);
-    const heartBtn = `<button class="card-heart${isFav ? ' active' : ''}" onclick="event.stopPropagation(); toggleFavorite('${esc(c.titlu)}')">${isFav ? '❤️' : '🤍'}</button>`;
+    const heartBtn = `<button class="card-heart${isFav ? ' active' : ''}" onclick="event.stopPropagation(); toggleFavorite(${jsq(c.titlu)})">${isFav ? '❤️' : '🤍'}</button>`;
 
     return `
       <div class="book-card" style="animation-delay:${i * 30}ms">
@@ -644,7 +647,7 @@ function renderMyBooks() {
             ${imp ? dateStatusHtml(imp) : ''}
             ${calcAmenda(imp) > 0 ? `<div class="amenda-badge">💰 ${calcAmenda(imp).toFixed(2)} RON</div>` : imp?.amendaStinsa ? '<div style="font-size:10px;color:var(--success);margin-top:2px">✓ Amenda stinsa</div>' : ''}
             <button class="borrow-btn" style="margin-top:7px;background:rgba(248,113,113,0.2);color:var(--danger);border:1px solid rgba(248,113,113,0.45);backdrop-filter:blur(6px)"
-              onclick="returnBook('${esc(c.titlu)}')">${t('return_btn')}</button>
+              onclick="returnBook(${jsq(c.titlu)})">${t('return_btn')}</button>
           </div>
         </div>
       </div>`;
@@ -748,9 +751,9 @@ function openModalDirect(c) {
   if (!state.user)
     actionBtn = `<button class="btn-ghost" onclick="closeModal(); document.getElementById('login-shortcut').click()">${t('login_to_borrow')}</button>`;
   else if (isBorrowed)
-    actionBtn = `<button class="btn-danger" style="padding:10px 20px" onclick="returnBook('${esc(c.titlu)}').then(() => closeModal())">${t('return_btn')}</button>`;
+    actionBtn = `<button class="btn-danger" style="padding:10px 20px" onclick="returnBook(${jsq(c.titlu)}).then(() => closeModal())">${t('return_btn')}</button>`;
   else
-    actionBtn = `<button class="btn-primary" onclick="borrowBook('${esc(c.titlu)}').then(() => closeModal())">${t('borrow_btn')}</button>`;
+    actionBtn = `<button class="btn-primary" onclick="borrowBook(${jsq(c.titlu)}).then(() => closeModal())">${t('borrow_btn')}</button>`;
 
   const modalCoverHtml = coverUrl(c)
     ? `<img src="${esc(coverUrl(c))}" class="modal-cover" alt="${esc(c.titlu)}" onerror="this.className='modal-cover-placeholder ph-${c.tip}'; this.outerHTML='<div class=\\'modal-cover-placeholder ph-${c.tip}\\'>${TYPE_EMOJI[c.tip]}</div>'" />`
@@ -1110,7 +1113,7 @@ async function renderAdminUsers() {
               <span class="imp-dates">${fmtDate(i.dataImprumut)} → ${fmtDate(i.dataReturnare)}</span>
               <span class="date-status ${cls}" style="font-size:11px;padding:2px 7px">${days < 0 ? `⚠ +${Math.abs(days)}z` : `${days}z`}</span>
               ${amenda > 0 ? `<span class="amenda-badge" style="font-size:10px;padding:2px 7px">💰 ${amenda.toFixed(2)} RON</span>` : i.amendaStinsa ? '<span style="font-size:10px;color:var(--success)">✓ stinsa</span>' : ''}
-              ${amenda > 0 ? `<button class="btn-stinge" onclick="stingeAmenda('${esc(u.username)}','${esc(i.titlu)}')">Stinge</button>` : ''}
+              ${amenda > 0 ? `<button class="btn-stinge" onclick="stingeAmenda(${jsq(u.username)},${jsq(i.titlu)})">Stinge</button>` : ''}
             </div>`;
           }).join('')}
           ${userTotalAmenda > 0 ? `<div style="font-size:12px;color:var(--danger);font-weight:700;padding-top:6px;border-top:1px solid var(--border)">Total amenda: ${userTotalAmenda.toFixed(2)} RON</div>` : ''}
@@ -1130,8 +1133,8 @@ async function renderAdminUsers() {
             <div class="user-meta">@${esc(u.username)} · ${u.dataNasterii || '—'}${u.functie ? ' · ' + esc(u.functie) : ''}${u.email ? ' · ' + esc(u.email) : ''}${u.telefon ? ' · ' + esc(u.telefon) : ''}${u.salariu ? ' · 💰 ' + u.salariu + ' RON' : ''} · ${u.imprumuturi.length} imprumuturi</div>
           </div>
           <div class="user-row-actions">
-            ${isDirector() ? `<button class="btn-edit" onclick="editUser('${esc(u.username)}')">✏ Edit</button>` : ''}
-            ${isDirector() && !u.esteAdmin ? `<button class="btn-danger" onclick="deleteUser('${esc(u.username)}')">✕</button>` : ''}
+            ${isDirector() ? `<button class="btn-edit" onclick="editUser(${jsq(u.username)})">✏ Edit</button>` : ''}
+            ${isDirector() && !u.esteAdmin ? `<button class="btn-danger" onclick="deleteUser(${jsq(u.username)})">✕</button>` : ''}
           </div>
         </div>
         ${impHtml}
@@ -1157,8 +1160,8 @@ async function renderAdminBooks(filter = '') {
         <div class="admin-book-author">${esc(c.autori.join(', '))} · ★ ${c.rating.toFixed(1)}${c.copii != null ? ` · 📚 ${c.copiiDisponibile ?? c.copii}/${c.copii} copii` : ''}</div>
       </div>
       <div class="row-actions">
-        <button class="btn-edit" onclick="editBook('${esc(c.titlu)}')">✏ Edit</button>
-        <button class="btn-danger" onclick="deleteBook('${esc(c.titlu)}')">✕</button>
+        <button class="btn-edit" onclick="editBook(${jsq(c.titlu)})">✏ Edit</button>
+        <button class="btn-danger" onclick="deleteBook(${jsq(c.titlu)})">✕</button>
       </div>
     </div>`).join('');
 }
@@ -1379,6 +1382,9 @@ function esc(str) {
     .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 }
+
+// Safe JS string for onclick attributes — JSON.stringify + HTML-escape
+function jsq(s) { return esc(JSON.stringify(String(s ?? ''))); }
 
 // ── Boot ──────────────────────────────────────────────────────────────────────
 tryRestoreSession();

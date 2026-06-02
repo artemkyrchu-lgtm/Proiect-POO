@@ -137,20 +137,27 @@ std::string getCookie(const Request& req, const std::string& name) {
 }
 
 std::string getSessionUser(const Request& req) {
-    std::string sid = getCookie(req, "sid");
+    // Try X-Session-Token header first (used by frontend)
+    std::string sid;
+    auto hit = req.headers.find("X-Session-Token");
+    if (hit != req.headers.end() && !hit->second.empty())
+        sid = hit->second;
+    else
+        sid = getCookie(req, "sid");
     if (sid.empty()) return "";
     std::lock_guard<std::mutex> lock(sessions_mtx);
     auto it = sessions.find(sid);
     return it != sessions.end() ? it->second : "";
 }
 
-void setSession(Response& res, const std::string& username) {
+std::string setSession(Response& res, const std::string& username) {
     std::string sid = generateSid();
     {
         std::lock_guard<std::mutex> lock(sessions_mtx);
         sessions[sid] = username;
     }
     res.set_header("Set-Cookie", "sid=" + sid + "; Path=/; HttpOnly");
+    return sid;
 }
 
 void clearSession(const Request& req, Response& res) {
@@ -221,8 +228,9 @@ int main() {
         auto conturi = readConturi();
         for (auto& c : conturi) {
             if (c["username"] == body.value("username", "") && c["parola"] == body.value("parola", "")) {
-                setSession(res, c["username"].get<std::string>());
-                return jr(res, safeUser(c));
+                auto sid = setSession(res, c["username"].get<std::string>());
+                auto u = safeUser(c); u["sid"] = sid;
+                return jr(res, u);
             }
         }
         jr(res, {{"error", "Username sau parola incorecta"}}, 401);
@@ -251,8 +259,7 @@ int main() {
                      {"imprumuturi", json::array()}, {"favorite", json::array()}};
         conturi.push_back(cont);
         writeConturi(conturi);
-        setSession(res, username);
-        jr(res, safeUser(cont));
+        { auto sid = setSession(res, username); auto u = safeUser(cont); u["sid"] = sid; jr(res, u); }
     });
 
     // ── POST /api/register-admin ───────────────────────────────────────────────
@@ -276,8 +283,7 @@ int main() {
                      {"imprumuturi", json::array()}, {"favorite", json::array()}};
         conturi.push_back(cont);
         writeConturi(conturi);
-        setSession(res, username);
-        jr(res, safeUser(cont));
+        { auto sid = setSession(res, username); auto u = safeUser(cont); u["sid"] = sid; jr(res, u); }
     });
 
     // ── GET /api/me ────────────────────────────────────────────────────────────
